@@ -13,6 +13,8 @@ Instructions:
 import os
 import sys
 from typing import Any
+from google import genai
+from google.genai import types
 
 # Standard Model Identifier
 GEMINI_MODEL = "gemini-2.5-flash"
@@ -39,15 +41,18 @@ def evaluate_prompt(user_input: str) -> str:
     """
     Calls the Gemini 2.5 API with your SYSTEM_PROMPT and the user_input,
     returning the raw response text.
-
-    Hint:
-        Set GEMINI_API_KEY or GOOGLE_API_KEY in your environment.
-        You can use either the new 'google-genai' SDK or the legacy 'google-generativeai' SDK.
     """
-    # TODO: Initialize Gemini client and call model.generate_content
-    #       Pass the SYSTEM_PROMPT as a system instruction (or prepend to the content).
-    #       Return the model's response text.
-    raise NotImplementedError("Implement evaluate_prompt")
+    client = genai.Client()
+    
+    response = client.models.generate_content(
+        model='gemini-2.5-flash',  # Hoặc gemini-2.5-pro tùy yêu cầu bài tập
+        contents=user_input,
+        config=types.GenerateContentConfig(
+            system_instruction=SYSTEM_PROMPT,
+        ),
+    )
+    
+    return response.text
 
 
 # ===========================================================================
