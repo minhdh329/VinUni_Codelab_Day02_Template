@@ -63,11 +63,11 @@ Hãy sử dụng **4 Lenses** dưới đây để quét qua hoạt động vận
 ### 📝 List bài toán của tôi:
 | # | Subsidiary (VinFast/Xanh SM...) | Lens | Mô tả ngắn bài toán |
 |---|----------------------------------|------|---------------------|
-| 1 | | | |
-| 2 | | | |
-| 3 | | | |
-| 4 | | | |
-| 5 | | | |
+| 1 | Xanh SM | Repetitive | Kiểm tra tính minh bạch của giao dịch, phát hiện giao dịch chuyển tiền giả |
+| 2 | Xanh SM | Stakeholder Pain | Gợi ý điểm đón khách chưa chính xác  |
+| 3 | Vinmec | Repetitive & AI-upgrade | Xử lý và trả lời câu hỏi của bệnh nhân về lịch khám, chuẩn bị xét nghiệm, thuốc, thông tin bác sĩ |
+| 4 | Vinmec | Repetitive & Time-consuming | Đặt lịch và tối ưu lịch khám bác sĩ. |
+| 5 | Vinhomes | AI-upgrade & Stakeholder Pain | Dự đoán và bảo trì thiết bị trong khu đô thị |
 
 ---
 
@@ -77,24 +77,84 @@ Chọn **top 3 bài toán** từ danh sách trên và hoàn thiện **3 Quick Pr
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│ QUICK PROBLEM CARD #___                                     │
-│                                                             │
-│ Bài toán (1 câu): ________________________________________  │
-│ Công ty thành viên: [ ] VinFast  [ ] Xanh SM  [ ] Vinhomes  │
+│ QUICK PROBLEM CARD #1                                       │
+│ Bài toán (1 câu): Kiểm tra tính minh bạch của giao dịch     │
+│ Công ty thành viên: [ ] VinFast  [X] Xanh SM  [ ] Vinhomes  │
 │                     [ ] Vinmec   [ ] Khác (Ghi rõ)________  │
 │                                                             │
-│ Ai đang đau (Actor)? ______________________________________ │
+│ Ai đang đau (Actor)? Tài xế Xanh SM và Xanh SM              │
 │                                                             │
 │ Workflow thủ công hiện tại (3-5 bước):                      │
-│   1. ___ ──> 2. ___ ──> 3. ___ ──> 4. ___                   │
+│   1. Ghi nhận giao dịch
+ ──> 2. Kiểm tra thông tin giao dịch và lịch sử chuyến đi
+ ──> 3. App xác nhận thanh toán thành công
+                                                             │
 │                                                             │
-│ Bước nào tốn thời gian/lỗi nhất? ___ (⏱ ___ phút/lượt)      │
-│ AI có thể nhảy vào hỗ trợ ở bước nào? _____________________ │
+│ Bước nào tốn thời gian/lỗi nhất? 2 (⏱  phút/lượt)      │
+│ AI có thể nhảy vào hỗ trợ ở bước nào? bước 2 để có thể kiểm tra nguồn gốc tài khoản có đúng với người dùng không │
 │                                                             │
-│ Đo thành công bằng gì (Metric có số)? ______________________ │
-│   VD: "Giảm thời gian soạn phản hồi từ 10 min ──> under 2 min"│
+│ Đo thành công bằng gì (Metric có số)? 
+Phát hiện ít nhất 95% giao dịch đáng ngờ và giảm thời gian kiểm tra từ 3 phút xuống dưới 2 phút/giao dịch.                                               │
 │                                                             │
-│ Quick Architecture: [ ] No AI  [ ] Rule  [ ] LLM  [ ] Agent │
+│                                                             │
+│ Quick Architecture: [ ] No AI  [ ] Rule  [x] LLM  [ ] Agent │
+└─────────────────────────────────────────────────────────────┘
+```
+
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ QUICK PROBLEM CARD #2                                       │
+│                                                             │
+│ Bài toán (1 câu): Gợi ý điểm đón khách chưa chính xác       │
+│ Công ty thành viên: [ ] VinFast  [X] Xanh SM  [ ] Vinhomes  │
+│                     [ ] Vinmec   [ ] Khác (Ghi rõ)__________ │
+│                                                             │
+│ Ai đang đau (Actor)? Tài xế và khách hàng Xanh SM            │
+│                                                             │
+│ Workflow thủ công hiện tại (3-5 bước):                      │
+│   1. Khách nhập địa chỉ                                     │
+│   ──> 2. Hệ thống xác định vị trí trên bản đồ                │
+│   ──> 3. Tài xế gọi khách để xác nhận điểm đón               │
+│   ──> 4. Hai bên tìm vị trí đón phù hợp và bắt đầu chuyến    │
+│                                                             │
+│ Bước nào tốn thời gian/lỗi nhất? 2-3 (⏱ 5 phút/lượt)         │
+│ AI có thể nhảy vào hỗ trợ ở bước 2: phân tích địa chỉ,       │
+│ nhận diện lối vào/điểm đón gần nhất và đề xuất tọa độ rõ ràng│
+│                                                             │
+│ Đo thành công bằng gì (Metric có số)?                       │
+│ Giảm tỷ lệ khách/tài xế phải gọi lại từ 20% xuống dưới 5%;   │
+│ giảm thời gian xác nhận điểm đón từ 5 phút xuống dưới 2 phút.│
+│                                                             │
+│ Quick Architecture: [ ] No AI  [ ] Rule  [x] LLM  [ ] Agent │
+└─────────────────────────────────────────────────────────────┘
+```
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ QUICK PROBLEM CARD #3                                       │
+│                                                             │
+│ Bài toán (1 câu): Trả lời câu hỏi thường gặp của bệnh nhân   │
+│ Công ty thành viên: [ ] VinFast  [ ] Xanh SM  [ ] Vinhomes  │
+│                     [X] Vinmec   [ ] Khác (Ghi rõ)__________ │
+│                                                             │
+│ Ai đang đau (Actor)? Bệnh nhân và nhân viên tổng đài Vinmec  │
+│                                                             │
+│ Workflow thủ công hiện tại (3-5 bước):                      │
+│   1. Bệnh nhân gọi/nhắn tin câu hỏi                          │
+│   ──> 2. Nhân viên tra cứu lịch khám hoặc tài liệu hướng dẫn  │
+│   ──> 3. Nhân viên soạn câu trả lời                           │
+│   ──> 4. Gửi phản hồi và chuyển bác sĩ nếu câu hỏi phức tạp  │
+│                                                             │
+│ Bước nào tốn thời gian/lỗi nhất? 2-3 (⏱ 8 phút/lượt)         │
+│ AI có thể nhảy vào hỗ trợ ở bước 2-3: tìm thông tin trong    │
+│ nguồn được phê duyệt và soạn câu trả lời cho nhân viên duyệt │
+│                                                             │
+│ Đo thành công bằng gì (Metric có số)?                       │
+│ Trả lời 85% câu hỏi thường gặp trong dưới 10 giây; giảm      │
+│ thời gian xử lý của nhân viên từ 8 phút xuống dưới 2 phút.  │
+│                                                             │
+│ Quick Architecture: [ ] No AI  [ ] Rule  [x] LLM  [ ] Agent │
 └─────────────────────────────────────────────────────────────┘
 ```
 
