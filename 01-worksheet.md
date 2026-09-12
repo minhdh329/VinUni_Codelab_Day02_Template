@@ -63,11 +63,11 @@ Hãy sử dụng **4 Lenses** dưới đây để quét qua hoạt động vận
 ### 📝 List bài toán của tôi:
 | # | Subsidiary (VinFast/Xanh SM...) | Lens | Mô tả ngắn bài toán |
 |---|----------------------------------|------|---------------------|
-| 1 | | | |
-| 2 | | | |
-| 3 | | | |
-| 4 | | | |
-| 5 | | | |
+| 1 | Vinhomes | Lặp lại | Gom và phân loại Khiếu nại & Đề xuất từ cư dân |
+| 2 | Vinhomes | AI có thể làm tốt hơn | Hỗ trợ cư dân làm thủ tục hành chính, đăng ký thẻ, mặt, etc. |
+| 3 | Vinhomes | AI có thể làm tốt hơn | Tổng hợp hóa đơn, đối chiếu với định mức trung bình để tìm ra các vị trí rò rỉ hoặc hỏng đồng hồ. |
+| 4 | Vinmec | AI có thể làm tốt hơn | Nhân viên tổng đài nhận yêu cầu đăng ký khám của bệnh nhân |
+| 5 | Vinmec | AI có thể làm tốt hơn | Lên dự trù nhập hàng dựa trên tồn kho |
 
 ---
 
@@ -77,24 +77,85 @@ Chọn **top 3 bài toán** từ danh sách trên và hoàn thiện **3 Quick Pr
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│ QUICK PROBLEM CARD #___                                     │
+│ QUICK PROBLEM CARD #1                                       │
 │                                                             │
-│ Bài toán (1 câu): ________________________________________  │
-│ Công ty thành viên: [ ] VinFast  [ ] Xanh SM  [ ] Vinhomes  │
+│ Bài toán (1 câu): Gom, đọc hiểu nội dung và phân loại tự    │
+│ động các khiếu nại, đề xuất từ cư dân về đúng bộ phận.      │
+│ Công ty thành viên: [ ] VinFast  [ ] Xanh SM  [x] Vinhomes  │
 │                     [ ] Vinmec   [ ] Khác (Ghi rõ)________  │
 │                                                             │
-│ Ai đang đau (Actor)? ______________________________________ │
+│ Ai đang đau (Actor)? Nhân viên CSKH, Ban quản lý tòa nhà.   │
 │                                                             │
-│ Workflow thủ công hiện tại (3-5 bước):                      │
-│   1. ___ ──> 2. ___ ──> 3. ___ ──> 4. ___                   │
+│ Workflow thủ công hiện tại (4 bước):                        │
+│   1. Cư dân gửi khiếu nại qua App Vinhomes/Zalo/Hotline     │
+│   ──> 2. Nhân viên đọc thủ công để hiểu vấn đề              │
+│   ──> 3. Phân loại và gán ticket cho bộ phận (Kỹ thuật/An   │
+│          ninh/Vệ sinh)                                      │
+│   ──> 4. Cập nhật trạng thái xử lý cho cư dân.              │
 │                                                             │
-│ Bước nào tốn thời gian/lỗi nhất? ___ (⏱ ___ phút/lượt)      │
-│ AI có thể nhảy vào hỗ trợ ở bước nào? _____________________ │
+│ Bước nào tốn thời gian/lỗi nhất? Bước 2 & 3 (⏱ 3-5 phút/lượt)│
+│ AI có thể nhảy vào hỗ trợ ở bước nào? Bước 2 & 3 (AI đọc    │
+│ text/nghe ghi âm, tự động gán nhãn và route ticket).        │
 │                                                             │
-│ Đo thành công bằng gì (Metric có số)? ______________________ │
-│   VD: "Giảm thời gian soạn phản hồi từ 10 min ──> under 2 min"│
+│ Đo thành công bằng gì (Metric có số)?                       │
+│ Giảm thời gian phân loại ticket từ 5 phút ──> dưới 10 giây; │
+│ Độ chính xác điều hướng đạt >95%.                           │
 │                                                             │
-│ Quick Architecture: [ ] No AI  [ ] Rule  [ ] LLM  [ ] Agent │
+│ Quick Architecture: [ ] No AI  [ ] Rule  [x] LLM  [ ] Agent │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ QUICK PROBLEM CARD #2                                       │
+│                                                             │
+│ Bài toán (1 câu): Trợ lý ảo hỗ trợ cư dân tra cứu, giải     │
+│ thích thủ tục và tiền kiểm duyệt form đăng ký hành chính.   │
+│ Công ty thành viên: [ ] VinFast  [ ] Xanh SM  [x] Vinhomes  │
+│                     [ ] Vinmec   [ ] Khác (Ghi rõ)________  │
+│                                                             │
+│ Ai đang đau (Actor)? Cư dân (chờ đợi), Lễ tân (quá tải).    │
+│                                                             │
+│ Workflow thủ công hiện tại (4 bước):                        │
+│   1. Cư dân hỏi lễ tân cách làm thủ tục (FaceID, vé xe)     │
+│   ──> 2. Lễ tân giải thích và cấp form đăng ký              │
+│   ──> 3. Cư dân điền form và nộp lại kèm ảnh/giấy tờ        │
+│   ──> 4. Lễ tân kiểm tra lỗi sai thủ công và duyệt cấp quyền│
+│                                                             │
+│ Bước nào tốn thời gian/lỗi nhất? Bước 2 & 4 (⏱ 10-15 phút)  │
+│ AI có thể nhảy vào hỗ trợ ở bước nào? Bước 2 & 4 (Chatbot   │
+│ hướng dẫn 24/7 và OCR/Vision kiểm tra hợp lệ giấy tờ).      │
+│                                                             │
+│ Đo thành công bằng gì (Metric có số)?                       │
+│ Giảm thời gian lễ tân hỗ trợ trực tiếp từ 15 phút ──> dưới  │
+│ 3 phút/lượt, phục vụ 100% yêu cầu ngoài giờ hành chính.     │
+│                                                             │
+│ Quick Architecture: [ ] No AI  [ ] Rule  [ ] LLM  [x] Agent │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ QUICK PROBLEM CARD #3                                       │
+│                                                             │
+│ Bài toán (1 câu): Dự báo nhu cầu sử dụng và tự động lập     │
+│ phiếu dự trù nhập hàng vật tư y tế, thuốc men.              │
+│ Công ty thành viên: [ ] VinFast  [ ] Xanh SM  [ ] Vinhomes  │
+│                     [x] Vinmec   [ ] Khác (Ghi rõ)________  │
+│                                                             │
+│ Ai đang đau (Actor)? Trưởng khoa dược, Điều dưỡng kho.      │
+│                                                             │
+│ Workflow thủ công hiện tại (4 bước):                        │
+│   1. Xuất báo cáo tồn kho hiện tại từ hệ thống HIS/ERP      │
+│   ──> 2. Đối chiếu định mức và xem xét lịch sử sử dụng cũ   │
+│   ──> 3. Tính toán số lượng cần nhập (dựa vào cảm tính/Excel)│
+│   ──> 4. Soạn thảo phiếu dự trù nhập hàng và trình ký duyệt │
+│                                                             │
+│ Bước nào tốn thời gian/lỗi nhất? Bước 2 & 3 (⏱ 2-3 giờ/lần) │
+│ AI có thể nhảy vào hỗ trợ ở bước nào? Bước 2, 3 & 4 (Phân   │
+│ tích dữ liệu tiêu thụ lịch sử, dự báo và tự draft phiếu).   │
+│                                                             │
+│ Đo thành công bằng gì (Metric có số)?                       │
+│ Giảm tỉ lệ tồn kho hết hạn xuống <2%; Giảm thời gian lập    │
+│ dự trù từ 3 giờ ──> dưới 15 phút/lần/kho.                   │
+│                                                             │
+│ Quick Architecture: [ ] No AI  [ ] Rule  [ ] LLM  [x] Agent │
 └─────────────────────────────────────────────────────────────┘
 ```
 
